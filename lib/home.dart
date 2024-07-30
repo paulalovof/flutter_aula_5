@@ -17,10 +17,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   //final List<CheckBoxOption> lenguage_options = []
-  bool cbIsSelected_1 = false;
+  //bool cbIsSelected_1 = false;
+  String resposta = '';
 
   _MyHomePageState();
 
+  /* lista do tipo check box option
   final List<CheckBoxOption> months = [
     CheckBoxOption(title: 'Janeiro'),
     CheckBoxOption(title: 'Fevereiro'),
@@ -34,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
     CheckBoxOption(checked: true, title: 'Outubro'),
     CheckBoxOption(title: 'Novembro'),
     CheckBoxOption(title: 'Dezembro'),
-  ];
+  ];*/
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +57,40 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
-        /*child: Column(
+      body: Row(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Radio(
+                value: 'Sim',
+                groupValue: resposta,
+                onChanged: (value) {
+                  setState(() {
+                    resposta = value.toString();
+                  });
+                },
+              ),
+              const Text('Sim'),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Radio(
+                value: 'Não',
+                groupValue: resposta,
+                onChanged: (value) {
+                  setState(() {
+                    resposta = value.toString();
+                  });
+                },
+              ),
+              const Text('Não'),
+            ],
+          )
+        ],
+        //padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+        /* Só um checkbox simples
+        child: Column(
           children: <Widget>[
             Text(
               'Meu Check Box',
@@ -87,6 +120,8 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ],
         ),*/
+
+        /* lista de checkbox
         child: ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -94,16 +129,28 @@ class _MyHomePageState extends State<MyHomePage> {
           itemBuilder: (_, index) {
             return CheckBoxCustom(item: months[index]);
           },
-        ),
+        ),*/
       ),
+
+      /* botao com funcao
       floatingActionButton: FloatingActionButton(
-        //onPressed: printSelectedMonths,
-        onPressed: () {},
+        onPressed: printSelectedMonths,
+        //onPressed: () {},
         child: const Icon(Icons.add),
         backgroundColor: Colors.pinkAccent.shade100,
-      ),
+      ),*/
     );
   }
+
+  /* funcao simples para passar para o botao
+  void printSelectedMonths() {
+    List<CheckBoxOption> selectedMonths =
+        List.from(months.where((item) => item.checked));
+
+    selectedMonths.forEach((item) {
+      print(item.title);
+    });
+  }*/
 }
 
 @override
